@@ -13,14 +13,14 @@ class Variant {
     var title: String?
     var price: String?
     var inventory: Int?
-    var weight: Double?
+    var weight: String?
     var weightUnit: String?
     
     init(data: JSON){
         title = data["title"].stringValue
         price = data["price"].stringValue
         inventory = data["inventory_quantity"].intValue
-        weight = data["weight"].doubleValue
+        weight = data["weight"].stringValue
         weightUnit = data["weight_unit"].stringValue
     }
 }

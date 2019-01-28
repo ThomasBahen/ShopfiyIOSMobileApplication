@@ -21,7 +21,7 @@ class ProductTableViewController: UITableViewController {
     let productBaseURL = "https://shopicruit.myshopify.com/admin/products.json?ids="
     let accessToken = "&page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6"
     let defaultHeaders: [String : String] = ["Content-Type":"application/json;charset=utf-8", "Accept": "application/json"]
-    let segueIdentifier = ""
+    let segueIdentifier = "ProductToVariant"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,9 +122,9 @@ class ProductTableViewController: UITableViewController {
             return cell
         }else {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Product", for: indexPath) as! ProductTableViewCell
-        cell.productTitle.text = collection?.products?[indexPath.row].title
-        cell.productBody.text = collection?.products?[indexPath.row].body
-        cell.totalInventory.text = "Total Inventory: \(collection?.products?[indexPath.row].totalInventory ?? 0)"
+        cell.productTitle.text = collection?.products?[indexPath.row-1].title
+        cell.productBody.text = collection?.products?[indexPath.row-1].body
+        cell.totalInventory.text = "Total Inventory: \(collection?.products?[indexPath.row-1].totalInventory ?? 0)"
             return cell
         }
     }
@@ -133,7 +133,7 @@ class ProductTableViewController: UITableViewController {
         if segue!.identifier == segueIdentifier {
             let destination = segue!.destination as! VariantTableViewController
             let productIndex = tableView.indexPathForSelectedRow?.row
-            destination.product = collection?.products?[productIndex!]
+            destination.product = collection?.products?[productIndex!-1]
         }
     }
  

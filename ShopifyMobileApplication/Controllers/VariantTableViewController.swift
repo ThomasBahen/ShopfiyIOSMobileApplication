@@ -15,11 +15,7 @@ class VariantTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
     }
 
     // MARK: - Table view data source
@@ -34,8 +30,22 @@ class VariantTableViewController: UITableViewController {
 
    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
+        if(indexPath.row == 0 ){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductSummary", for: indexPath) as! ProductSummaryTableViewCell
+        cell.title.text = product?.title
+        cell.productBody.text = product?.body
+        cell.totalInventory.text = "Total Inventory: \(product?.totalInventory ?? 0)"
         return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Variant", for: indexPath) as! VariantTableViewCell
+            cell.inventory.text = "Inventory: \(product?.variants?[indexPath.row].inventory ?? 0)"
+            cell.variantTitle.text = product?.variants?[indexPath.row].title
+            cell.price.text = "$ \(product?.variants?[indexPath.row].inventory ?? 0)"
+            cell.weight.text = product?.variants?[indexPath.row].weight
+            cell.weight.text?.append(" ")
+            cell.weight.text?.append(product?.variants?[indexPath.row].weightUnit ?? " ")
+            return cell
+        }
     }
    
 
